@@ -7,7 +7,7 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/knative-releases/knative.dev/eventing/cmd/appender
+        - image: gcr.lank8s.cn/knative-releases/knative.dev/eventing/cmd/appender
           env:
             - name: MESSAGE
               value: " - Handled by SQ-01"
@@ -21,7 +21,7 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/knative-releases/knative.dev/eventing/cmd/appender
+        - image: gcr.lank8s.cn/knative-releases/knative.dev/eventing/cmd/appender
           env:
             - name: MESSAGE
               value: " - Handled by SQ-02"
@@ -35,7 +35,7 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/knative-releases/knative.dev/eventing/cmd/appender
+        - image: gcr.lank8s.cn/knative-releases/knative.dev/eventing/cmd/appender
           env:
             - name: MESSAGE
               value: " - Handled by SQ-03"
