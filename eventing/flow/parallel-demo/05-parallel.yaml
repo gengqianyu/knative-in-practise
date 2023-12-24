@@ -1,6 +1,6 @@
 ---
 apiVersion: flows.knative.dev/v1
-kind: Parallel
+kind: Parallel                    # 并发事件处理工作流 声明
 metadata:
   name: filetype-parallel
   namespace: event-demo
@@ -8,13 +8,13 @@ spec:
   channelTemplate:
     apiVersion: messaging.knative.dev/v1
     kind: InMemoryChannel
-  branches:
-    - filter:
+  branches:                       # 分支定义，所有的分支都会得到消息
+    - filter:                     # 消息过滤器
         ref:
           apiVersion: serving.knative.dev/v1
           kind: Service
           name: image-filter
-      subscriber:
+      subscriber:                 # 消息订阅者，处理完了以后交给 sink ksvc:event-display:event-demo
         ref:
           apiVersion: serving.knative.dev/v1
           kind: Service
@@ -29,7 +29,7 @@ spec:
           apiVersion: serving.knative.dev/v1
           kind: Service
           name: para-appender-text
-  reply:
+  reply:                          # 最后的 sink
     ref:
       apiVersion: serving.knative.dev/v1
       kind: Service

@@ -1,5 +1,5 @@
 apiVersion: flows.knative.dev/v1
-kind: Sequence                    # 串型工作流定义
+kind: Sequence                                  # 消息处理串型工作流声明
 metadata:
   name: sq-demo
   namespace: event-demo
