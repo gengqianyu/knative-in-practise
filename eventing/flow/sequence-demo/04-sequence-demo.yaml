@@ -1,27 +1,27 @@
 apiVersion: flows.knative.dev/v1
-kind: Sequence
+kind: Sequence                    # 串型工作流定义
 metadata:
   name: sq-demo
   namespace: event-demo
 spec:
-  channelTemplate:
+  channelTemplate:                              # 使用的 imc 完成消息处理工作流
     apiVersion: messaging.knative.dev/v1
     kind: InMemoryChannel
-  steps:
+  steps:                                        # 定义消息处理工作流步骤
     - ref:
         apiVersion: serving.knative.dev/v1
         kind: Service
-        name: sq-appender-01
+        name: sq-appender-01                    # 消息处理的第 1 个 step ，ksvc:sq-appender-01:event-demo
     - ref:
         apiVersion: serving.knative.dev/v1
         kind: Service
-        name: sq-appender-02
+        name: sq-appender-02                    # 消息处理的第 2 个 step ，ksvc:sq-appender-01:event-demo
     - ref:
         apiVersion: serving.knative.dev/v1
         kind: Service
-        name: sq-appender-03
+        name: sq-appender-03                    # 消息处理的第 3 个 step ，ksvc:sq-appender-01:event-demo
   reply:
     ref:
       kind: Service
       apiVersion: serving.knative.dev/v1
-      name: event-display
+      name: event-display                       # 最终 sink ksvc:event-display:event-demo
