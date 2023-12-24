@@ -1,23 +1,23 @@
 apiVersion: sources.knative.dev/v1
-kind: ContainerSource
+kind: ContainerSource                 # 容器消息源
 metadata:
   name: containersource-heartbeat
 spec:
   template:
     spec:
       containers:
-        - image: ikubernetes/containersource-heartbeats:latest
+        - image: ikubernetes/containersource-heartbeats:latest  # 消息发送方容器
           name: heartbeats
           env:
-          - name: POD_NAME
-            valueFrom:
-              fieldRef:
-                fieldPath: metadata.name
-          - name: POD_NAMESPACE
-            valueFrom:
-              fieldRef:
-                fieldPath: metadata.namespace
-  sink:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name  # 使用 Downward API 的方式引用自身的属性值
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+  sink: # 消息接收方 是一个 Ksvc 名字叫 event-display
     ref:
       apiVersion: serving.knative.dev/v1
       kind: Service

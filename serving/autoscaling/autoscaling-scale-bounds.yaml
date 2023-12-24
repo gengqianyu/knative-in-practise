@@ -9,8 +9,8 @@ spec:
       annotations:
         autoscaling.knative.dev/target-utilization-percentage: "60"
         autoscaling.knative.dev/target: "10"
-        autoscaling.knative.dev/max-scale: "3"
-        autoscaling.knative.dev/initial-scale: "1"
+        autoscaling.knative.dev/max-scale: "3"                  # 上边界
+        autoscaling.knative.dev/initial-scale: "1"              # 初始实例数
         autoscaling.knative.dev/scale-down-delay: "1m"
         autoscaling.knative.dev/stable-window: "60s"
     spec:

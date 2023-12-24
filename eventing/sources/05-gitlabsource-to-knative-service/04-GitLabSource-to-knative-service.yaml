@@ -1,26 +1,27 @@
 apiVersion: sources.knative.dev/v1alpha1
-kind: GitLabSource
+kind: GitLabSource                        # gitlib 源对象，相当于一个 gengqianyu 用户的代理
 metadata:
   name: gitlabsource-demo
   namespace: event-demo
 spec:
-  eventTypes:
+  eventTypes:                           # 指定要 watch 的事件类型
     - push_events
     - issues_events
     - merge_requests_events
     - tag_push_events
-  projectUrl: http://code.gitlab.svc.cluster.local/root/myproject
-  sslverify: false
-  accessToken:
-    secretKeyRef:
+#  projectUrl: http://gitlab.example.com/video/gostudy   # 仓库地址
+  projectUrl: http://10.211.55.3/video/gostudy   # 仓库地址
+  sslverify: false                                      # 是否需要 ssl 认证
+  accessToken:                                          # gitlab 上仓库所属的用户的 personal access token
+    secretKeyRef:                                       # 从 secret 对象中进行引用
       name: gitlabsecret
       key: accessToken
-  secretToken:
-    secretKeyRef:
+  secretToken:                                          # 由 gitlab 经 webhook 回调 GitLabSource 通知它来拿消息时使用的 secret
+    secretKeyRef:                                       # 从 secret 对象中进行引用
       name: gitlabsecret
       key: secretToken
   sink:
     ref:
       apiVersion: serving.knative.dev/v1
       kind: Service
-      name: event-display
+      name: event-display                               # 不写 namespace 默认就是当前 namespace，理论上可以是其他 namespace 下的 ksvc

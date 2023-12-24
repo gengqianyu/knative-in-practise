@@ -11,6 +11,6 @@ spec:
         autoscaling.knative.dev/min-scale: "1"
     spec:
       containers:
-        - image: ikubernetes/event_display
+        - image: gcr.lank8s.cn/knative-releases/knative.dev/eventing/cmd/event_display
           ports:
             - containerPort: 8080
